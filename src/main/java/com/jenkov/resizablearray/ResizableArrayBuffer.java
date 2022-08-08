@@ -72,7 +72,7 @@ public class ResizableArrayBuffer {
         ResizableArray resizableArray = new ResizableArray(this);       //todo get from Message pool - caps memory usage.
 
         resizableArray.sharedArray = this.sharedArray;
-        resizableArray.capacity    = smallBlockSize;
+        resizableArray.capacity    = smallBlockSize * smallBlockCount;
         resizableArray.offset      = nextFreeSmallBlock;
         resizableArray.length      = 0;
 

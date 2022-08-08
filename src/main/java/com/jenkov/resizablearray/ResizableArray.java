@@ -27,6 +27,8 @@ public class ResizableArray {
     public int writeToMessage(ByteBuffer byteBuffer){
         int remaining = byteBuffer.remaining();
 
+        //length 是当前已经使用的byte数量，
+        //remaining 实际需要使用的数量
         while(length + remaining > capacity){
             //expand message.
             if(!this.resizableArrayBuffer.expandArray(this)) {
@@ -34,11 +36,11 @@ public class ResizableArray {
             }
         }
 
-        
-        byteBuffer.get(this.sharedArray, this.offset + this.length, remaining);
-        this.length += bytesToCopy;
 
-        return bytesToCopy;
+        byteBuffer.get(this.sharedArray, this.offset + this.length, remaining);
+        this.length += remaining;
+
+        return remaining;
     }
 
     public void free() {
